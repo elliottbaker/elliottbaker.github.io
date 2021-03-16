@@ -2,6 +2,7 @@
   <html>
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       <title>Elliott Baker GEOG 585 Term Project - Phoenix Bikeways</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" type="text/css" crossorigin="">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" crossorigin=""></script>
@@ -16,11 +17,16 @@
           var map;
 
           function init() {
-          // create map and set center and zoom level WORKS
+          // create map and set center and zoom level
           map = new L.map('mapid');
+
+          // Set view at central Phoenix (default)
           map.setView([33.452,-112.073],12);
 
-            // create and add streets basemap
+          //Set view at user location (if accepted)
+          map.locate({setView: true, maxZoom: 16});
+
+          // create and add streets basemap
           var streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
           streetMap.addTo(map);
 
@@ -45,19 +51,14 @@
                fillOpacity: .7
             };
           }
-          // Selected Style Station Layer
-          var selectedStationIcon = L.icon({
-            iconUrl: 'metro_low.png',
-            iconSize: [25,25]
-          });
 
-          // Station Icon
+          // Station Icon STyle
           var stationIcon = L.icon({
             iconUrl: 'metro_low.png',
             iconSize: [15,15]
           });
 
-          // Bikeways
+          // Bikeways Style
           function bikewaysStyle(feature) {
             var colorToUSE;
             var pathType = feature.properties.PATHTYPE;
@@ -77,7 +78,7 @@
             };
           }
 
-          // Light Rail Lines
+          // Light Rail Lines Style
           function lightRailLinesStyle(feature) {
             return {
               "color": "#FFA500",
@@ -106,37 +107,44 @@
             });
 
           }
-              // Add in GeoJSON Layers
 
-                // bikeways
-                var bikewaysLayer = new L.geoJSON(bikewaysData,{
-                  style: bikewaysStyle,
-                  onEachFeature: bikewaysOnEachFeature
-                });    
-                bikewaysLayer.addTo(map);
+          //Show marker if user location is accepted
+          function onLocationFound(e) {
+            var radius = e.accuracy;
+
+            L.marker(e.latlng).addTo(map)
+            .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+            L.circle(e.latlng, radius).addTo(map);
+            }
+
+            map.on('locationfound', onLocationFound);
+
+          // Add in GeoJSON Layers
+
+          // bikeways
+          var bikewaysLayer = new L.geoJSON(bikewaysData,{
+            style: bikewaysStyle,
+            onEachFeature: bikewaysOnEachFeature
+          });    
+          bikewaysLayer.addTo(map);
 
 
-                //Light Rail stops
-                var lightRailStopsLayer = new L.geoJSON(lightRailStopsData,{
-                pointToLayer: function (feature, latlng) {
-                  return L.marker(latlng, {icon: stationIcon});
-                },
-                });
-                lightRailStopsLayer.addTo(map);
-               
+          //Light Rail stops
+          var lightRailStopsLayer = new L.geoJSON(lightRailStopsData,{
+          pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, {icon: stationIcon});
+          },
+          });
+          lightRailStopsLayer.addTo(map);
+          
 
-                // Light Rail Lines
-                var lightRailLinesLayer = new L.geoJSON(lightRailLinesData,{
-                  style: lightRailLinesStyle,
-                });    
-               
-                lightRailLinesLayer.addTo(map);
-
-               
-                //parksLayer.addTo(map);
-
-                //Add Legend
-
+          // Light Rail Lines
+          var lightRailLinesLayer = new L.geoJSON(lightRailLinesData,{
+            style: lightRailLinesStyle,
+          });    
+          
+          lightRailLinesLayer.addTo(map);
 
           // define basemap and thematic layers and add layer switcher control
           var basemaps = {
@@ -151,7 +159,7 @@
           };
           L.control.layers(basemaps,layers).addTo(map);
 
-          /*Legend specific*/
+          //Legend
           var legend = L.control({ position: "bottomleft" });
 
           legend.onAdd = function(map) {
@@ -164,16 +172,11 @@
             div.innerHTML += '<i style="background: #fac5aa"></i><span>Multi Use Path-Unpaved</span><br>';
             div.innerHTML += '<i style="background: #9bbb59"></i><span>Recreational Trail</span><br>';
             div.innerHTML += '<i style="background: orange"></i><span>Phoenix Light Rail Lines</span><br>';
-            
-            
 
             return div;
           };
 
           legend.addTo(map);
-       
-
-
 
           // handle clicks on the map that didn't hit a feature
           map.addEventListener('click', function(e) {
