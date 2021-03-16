@@ -34,7 +34,6 @@
           var imagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', {
           attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'});
 
-          var parksLayer;
           var lightRailLinesLayer
           var bikewaysLayer
           var lightRailStopsLayer
@@ -99,7 +98,7 @@
                   selection = e.target;
                   selectedLayer = bikewaysLayer;
 
-                  //Park Layer Popup
+                  //Layer Popup
                   layer.bindPopup( '<center><u><b>Bikeway Type</b></u> <br>' + feature.properties.PATHTYPE+'<br><center><u><b>Name</b></u><br>'+feature.properties.NAME+'<br><center><u><b>Surface Type</b></u><br>'+feature.properties.SURFACE);
 
                   L.DomEvent.stopPropagation(e); // stop click event from being propagated further
