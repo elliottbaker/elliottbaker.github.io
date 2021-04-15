@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- charset utf-8 is English -->
+    <meta charset="utf-8" />
+    <!-- This sets the display to match the users viewport -->
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Elliott Baker Lesson 7</title>
+    <link rel="stylesheet" href="main.css"></link>
+    <!-- Link to ESRI's CSS Template -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css" />
+    <!-- API = Application Programing Interface, set of Javascript libraries -->
+    <!-- Link to Esri's Javascript API -->
+    <script src="https://js.arcgis.com/4.18/"></script>
+    <script src="main.js"></script>
+
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+    <div id="paneDiv" class="esri-widget">
+      <div>
+        <h2>2020 Election Results Mapper</h2>
+        <p>Please Enter State Abbreviation Below</p>
+        <input type='text' id='stateName' placeholder='e.g., AZ'></input>
+        <button class="esri-widget" id="btnQuery">Map it!</button> <br /><br />
+        <span id='results'></span>
+      </div>
+    </div>
+    <div class="panel-side">
+      <h2>Counties</h2>
+      <p>Zoom and pan map to update counties list</p>
+      <ul id="list_counties">
+        <li>Loading&hellip;</li>
+      </ul>
+    </div>
+  </body>
+</html>

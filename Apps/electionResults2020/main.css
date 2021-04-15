@@ -1,0 +1,60 @@
+html,
+body,
+#viewDiv {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+#paneDiv {
+  background-color: #457b9d;
+  color: white;
+  padding: 10px;
+  width: 300px;
+} 
+.esri-legend__service .esri-widget__heading {
+  background-color:#457b9d;
+  color: white;
+  padding: 10px; }
+
+  .panel-side {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    background-color: #457b9d;
+    overflow: auto;
+    z-index: 60;
+  }
+
+  .panel-side h3 {
+    padding: 0 20px;
+    margin: 20px 0;
+  }
+
+  .panel-side ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .panel-side li {
+    list-style: none;
+    padding: 10px 20px;
+  }
+
+  .panel-result {
+    cursor: pointer;
+    margin: 2px 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .panel-result:hover,
+  .panel-result:focus {
+    color: orange;
+    background-color: rgba(0, 0, 0, 0.75);
+  }
