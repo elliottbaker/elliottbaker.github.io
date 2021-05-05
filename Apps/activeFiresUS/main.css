@@ -1,0 +1,82 @@
+html,
+body,
+#viewDiv {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#paneDiv {
+  background-color: #de2d26;
+  color: #feb24c;
+  padding: 10px;
+  width: 300px;
+}
+input {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #feb24c;
+
+}
+::placeholder {
+  color: #feb24c;
+  font-size: 1.em;
+}
+#btnQuery {
+background-color: rgba(0, 0, 0, 0.3);
+color: #feb24c;
+font-size: 1.em;
+
+}
+.esri-legend__service .esri-widget__heading {
+  background-color:#de2d26;
+  color: #feb24c;
+  padding: 10px;
+  font-size: 1.4em;
+ }
+ .esri-legend__layer-caption {
+  color: #242424;
+ }
+
+.panel-side {
+  padding: 10px;
+  box-sizing: content-box;
+  width: 300px;
+  height: 98%;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #feb24c;
+  background-color: #de2d26;
+  overflow: auto;
+  z-index: 60;
+}
+
+.panel-side h3 {
+  padding: 0 20px;
+  margin: 20px 0;
+}
+
+.panel-side ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.panel-side li {
+  list-style: none;
+  padding: 10px 20px;
+}
+
+.panel-result {
+  cursor: pointer;
+  margin: 2px 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.panel-result:hover,
+.panel-result:focus {
+  color: orange;
+  background-color: rgba(0, 0, 0, 0.75);
+}

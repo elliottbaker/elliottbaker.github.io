@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Current US Wild Fires</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/dark-red/main.css" />
+    <!-- Fire Icon Source: <a href="https://icons8.com/icon/houGsYyNpCbu/fire">Fire icon by Icons8</a> -->
+    <script src="https://js.arcgis.com/4.19/"></script>
+    <script src="main.js"></script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+    <div id="paneDiv" class="esri-widget">
+      <div>
+        <h2>Active US Wildfires</h2>
+        <p>Please Enter State Abbreviation Below</p>
+        <input type='text' id='stateName' placeholder='e.g., AZ'></input>
+        <button class="esri-widget" id="btnQuery">Map it!</button> <br /><br />
+        <span id='results'></span>
+      </div>
+    </div>
+    <div class="panel-side">
+      <h2>Wildfires</h2>
+      <p>Specify a state to see a list of active wildfires</p>
+      <ul id="list_counties">
+      </ul>
+    </div>
+  </body>
+</html>
